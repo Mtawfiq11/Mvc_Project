@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MemberBookingViewModel>
+
+<div class="card shadow-sm">
+    <div class="card-header">
+        <h5>Session Members</h5>
+        <a asp-action="Book" asp-route-sessionId="@ViewBag.SessionId" class="btn btn-sm btn-light float-end">New Booking</a>
+    </div>
+    <div class="card-body">
+        @if (Model.Any())
+        {
+            <table class="table table-striped align-middle text-center">
+                <thead>
+                    <tr>
+                        <th>Member</th>
+                        <th>Booking Date</th>
+                        <th>Attendance</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var member in Model)
+                    {
+                        <tr>
+                            <td>@member.MemberName</td>
+                            <td>@member.BookingDate</td>
+                            <td>
+                                @if (member.IsAttended)
+                                {
+                                    <span class="text-success">Attended</span>
+                                }
+                                else
+                                {
+                                    <form method="post" asp-action="Mark">
+                                        <input type="hidden" name="bookingId" value="@member.BookingId" />
+                                        <button type="submit" class="btn btn-outline-success btn-sm">Mark as Attended</button>
+                                    </form>
+                                }
+                            </td>
+                            <td>
+                                <form method="post" asp-action="Cancel">
+                                    <input type="hidden" name="sessionId" value="@ViewBag.SessionId" />
+                                    <input type="hidden" name="memberId" value="@member.MemberId" />
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Cancel</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="text-center py-5 text-muted">
+                <i class="bi bi-person-workspace display-1"></i>
+                <h4>No Members Available</h4>
+            </div>
+        }
+    </div>
+</div>

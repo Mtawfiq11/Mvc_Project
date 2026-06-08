@@ -1,0 +1,17 @@
+﻿using GymManagementBLL.ViewModels.login;
+using GymManagementDAL.Entites;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GymManagementBLL.Service.Interfaces
+{
+    public interface IAccountService
+    {
+        ApplicationUser? ValidateUser(LoginViewModel loginViewModel);
+
+
+    }
+}
