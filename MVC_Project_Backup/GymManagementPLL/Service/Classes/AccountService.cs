@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GymManagementBLL.Service.Classes
-{
+{ //account service to validate user login credentials using ASP.NET Identity's UserManager
     public class AccountService : IAccountService
     {
         private readonly UserManager<ApplicationUser> _userManager;
